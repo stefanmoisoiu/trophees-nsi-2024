@@ -21,16 +21,20 @@ class Tours:
     def joueur_actuel(self, participants: Participants) -> Joueur:
         return participants.get_liste_joueurs()[self.__indice_joueur]
 
-    def joueur_suivant(self,participants : Participants) -> Joueur:
+    def joueur_suivant(self, participants: Participants) -> Joueur:
         indice_joueur_suivant = self.__indice_joueur + self.get_sens()
         indice_joueur_suivant = self.garder_indice_dans_tableau(indice_joueur_suivant, participants.get_liste_joueurs())
         return participants.get_liste_joueurs()[indice_joueur_suivant]
 
+    def passer_tour(self):
+        self.__compteur_tour += 1 * self.__sens
+
     def passer_joueurs(self, nombre: int, participants: Participants):
         self.__indice_joueur += nombre * self.__sens
         self.__indice_joueur = self.garder_indice_dans_tableau(self.__indice_joueur, participants.get_liste_joueurs())
+        self.passer_tour()
 
-    def garder_indice_dans_tableau(self, indice:int, tab : list):
+    def garder_indice_dans_tableau(self, indice: int, tab: list):
         """
         :param indice : indice du tableau
         :param tab : tableau
@@ -38,12 +42,13 @@ class Tours:
         :return l'indice (changé si dépasse les bornes)
         """
         if indice < 0:
-            indice = len(tab) - abs(indice) % (len(tab)+1)
+            indice = len(tab) - abs(indice) % (len(tab) + 1)
         else:
             indice = indice % len(tab)
         return indice
 
-    def texte_main_joueur(self, joueur, cartes_compatibles, participants: Participants, pioche: Pioche, defausse: Defausse):
+    def texte_main_joueur(self, joueur, cartes_compatibles, participants: Participants, pioche: Pioche,
+                          defausse: Defausse):
         res = ""
         for i in range(len(cartes_compatibles)):
             cartes_compatible = cartes_compatibles[i]
@@ -72,9 +77,11 @@ class Tours:
             if carte_compatible[1]:
                 return False
         return True
+
     def tour_fini(self, participants: Participants):
         self.passer_joueurs(1, participants)
         self.__compteur_tour += 1
+
     def tour_suivant(self, participants: Participants, pioche: Pioche, defausse: Defausse) -> bool:
         """
         Méthode qui gére le déroulement d'un tour
@@ -87,7 +94,6 @@ class Tours:
         if partie_finie:
             print("La partie est finie, il n'y a plus de cartes dans la pioche et dans la défausse.")
             return True
-
 
         joueur = self.joueur_actuel(participants)
         carte_dessus = defausse.carte_dessus()
@@ -107,7 +113,6 @@ class Tours:
             print(f"Vous avez pioché la carte : \n{str(carte_piochee)} \n")
             self.tour_fini(participants)
             return False
-
 
         print("\n\n0 : Piocher une carte \n1 : Jouer une carte \n")
         choix = input("Que voulez-vous faire ? ")

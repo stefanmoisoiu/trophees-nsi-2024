@@ -10,6 +10,7 @@ class Partie:
     """
     Classe qui gère le déroulement du jeu
     """
+
     def __init__(self, participants: Participants, deck: Deck, nb_cartes_a_distribuer: int = 7):
         """
         :param nb_joueurs: nombre de joueurs dans la partie
@@ -69,9 +70,9 @@ changer_sens = ChangerSens()
 
 effets = [(EffetCarte('plus 2', 20, [plus_2]), 2, False),
           (EffetCarte('plus 4', 50, [plus_4]), 2, True),
-          (EffetCarte('changement de sens', 20,[changer_sens]), 2, False),
-          (EffetCarte('interdiction', 20,[interdiction]), 2, False),
-          (EffetCarte('Joker', 50,[plus_4,choisir_couleur]), 4, True)]
+          (EffetCarte('changement de sens', 20, [changer_sens]), 2, False),
+          (EffetCarte('interdiction', 20, [interdiction]), 2, False),
+          (EffetCarte('Joker', 50, [plus_4, choisir_couleur]), 4, True)]
 
 deck = Deck(couleurs, numero_max_carte, effets)
 partie = Partie(participants, deck)

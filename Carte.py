@@ -2,7 +2,7 @@ from effet_carte import EffetCarte
 
 
 class Carte:
-    def __init__(self, nombre: int, couleur: int, effet: EffetCarte)    :
+    def __init__(self, nombre: int, couleur: int, effet: EffetCarte):
         """
         Entree : nombre (int), couleur (int), effet (EffetCarte)
         Initialise une carte avec un nombre, couleur et/ou effet.
@@ -29,7 +29,7 @@ class Carte:
         """
         return self.__couleur
 
-    def get_effet(self) -> EffetCarte:
+    def get_carte_effet(self) -> EffetCarte:
         """
         :return  l'effet de la carte
         """
@@ -52,12 +52,8 @@ class Carte:
         :param autre_carte: carte à comparer
         :return: renvoie un boolean si les cartes proposé sont compatibles
         """
-        autre_effet = autre_carte.get_effet()
-        notre_effet = self.get_effet()
-
-        if autre_effet is not None and not autre_effet.carte_posable(self, tour, participants, pioche, defausse):
-            return False
-
+        autre_effet = autre_carte.get_carte_effet()
+        notre_effet = self.get_carte_effet()
 
         if notre_effet is not None and autre_effet is not None and autre_effet == notre_effet:
             return True
@@ -72,18 +68,19 @@ class Carte:
         """
         :return: description de la carte
         """
-        return f'Carte de nombre: {self.get_nombre()}, couleur: {self.get_couleur()} et effet {str(self.get_effet())}'
+        return f'Carte de nombre: {self.get_nombre()}, couleur: {self.get_couleur()} et effet {str(self.get_carte_effet())}'
 
 
 class Deck:
     """
     Classe permettant de créer un deck de cartes
     """
+
     def __init__(self, couleurs: list[str], numero_max_carte: int, effets: list[tuple[EffetCarte, int, bool]]) -> None:
         """
-        :param couleurs: liste des couleurs du deck
-        :param numero_max_carte: le numero max que les cartes peuvent avoir (ex: 9 pour le uno classique)
-        :param effets: liste des effets du deck sous la forme (effet, nombre d'apparitions par couleur, la carte est multi-couleur)
+        :param couleurs: liste des couleurs du deck :param numero_max_carte: le numero max que les cartes peuvent
+        avoir (ex: 9 pour le UNO classique) :param effets: liste des effets du deck sous la forme (effet,
+        nombre d'apparitions par couleur, la carte est multi-couleur)
         """
         self.__couleurs = couleurs
         self.__nombre_max = numero_max_carte
@@ -116,7 +113,6 @@ class Deck:
         for nombre in range(self.get_nombre_max() + 1):
             for i_couleur in range(len(self.get_couleurs())):
                 deck.append(Carte(nombre, i_couleur, None))
-
 
         for effet in self.get_effets():
             for i in range(effet[1]):

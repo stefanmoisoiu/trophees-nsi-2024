@@ -33,16 +33,15 @@ class Joueur:
         """
         return self.__liste_cartes
 
-    def cartes_compatibles(self,carte : Carte, tour, participants, pioche, defausse) -> list[tuple[Carte,bool]]:
+    def cartes_compatibles(self, carte: Carte, tour, participants, pioche, defausse) -> list[tuple[Carte, bool]]:
         """
         :return: renvoie la liste des cartes compatibles avec la carte du dessus de la défausse
         """
         liste_cartes_compatibles = []
         for carte_joueur in self.get_liste_cartes():
-            liste_cartes_compatibles.append((carte_joueur, carte_joueur.carte_compatible(carte, tour, participants, pioche, defausse)))
+            liste_cartes_compatibles.append(
+                (carte_joueur, carte_joueur.carte_compatible(carte, tour, participants, pioche, defausse)))
         return liste_cartes_compatibles
-
-
 
     def ajouter_carte(self, carte) -> None:
         """
@@ -107,7 +106,7 @@ class Joueur:
         Tri les cartes par couleur puis par nombre
         """
         cartes_separees = []
-        #(0,[Carte(0,0,None)])
+        # (0,[Carte(0,0,None)])
 
         for carte in cartes:
             for carte_separee in cartes_separees:
