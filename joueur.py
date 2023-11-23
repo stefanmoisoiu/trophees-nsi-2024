@@ -7,9 +7,10 @@ class Joueur:
     Classe qui crée un joueur avec un id, un pseudo et une liste de cartes
     """
 
-    def __init__(self, id: int, pseudo: str):
+    def __init__(self, id: int, pseudo: str) -> None:
         """
         :param id (int), pseudo (str)
+        :param pseudo: pseudo du joueur
         """
         self.__id: int = id
         self.__pseudo: str = pseudo
@@ -132,7 +133,7 @@ class Joueur:
 
     def __str__(self) -> str:
         """
-        :return: le pseudo du joueur et son id (str) avec ces cartes dans ça main
+        :return: le pseudo du joueur et son id (str) avec ces cartes dans sa main
         """
         res = f'Joueur {self.get_pseudo()} avec id {self.get_id()} possède ces cartes:\n'
         for carte in self.get_liste_cartes():
@@ -157,10 +158,10 @@ class Participants:
         """
         return self.__liste_joueurs
 
-    def get_joueur_par_id(self, id) -> Joueur:
+    def get_joueur_par_id(self, id : str) -> Joueur | None:
         """
-        :param id (str): id du joueur
-        :return: le joueur qui à l'id donné
+        :param id: id du joueur
+        :return: le joueur qui a l'id donné
         """
         for joueur in self.get_liste_joueurs():
             if joueur.get_id() == id:

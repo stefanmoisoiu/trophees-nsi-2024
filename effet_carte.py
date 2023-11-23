@@ -3,6 +3,9 @@ import time
 
 class Effet:
     def appliquer(self, tour, participants, pioche, defausse):
+        """
+        Applique l'effet de la carte
+        """
         pass
 
 
@@ -14,7 +17,7 @@ class EffetCarte:
     def __init__(self, nom: str, points: int, effets: list[Effet]) -> None:
         """
         :param nom: nom de l'effet
-        :param points: points que l'effet rapporte a la fin de la partie
+        :param points: le nombre de points que l'effet rapporte à la fin de la partie
         """
         self.__nom = nom
         self.__points = points
@@ -28,7 +31,7 @@ class EffetCarte:
 
     def get_points(self) -> int:
         """
-        :return: les points que l'effet rapporte a la fin de la partie
+        :return: les points que l'effet rapporte à la fin de la partie
         """
         return self.__points
 
@@ -38,7 +41,7 @@ class EffetCarte:
         """
         return self.__effets
 
-    def appliquer_effet(self, tour, participants, pioche, defausse):
+    def appliquer_effet(self, tour, participants, pioche, defausse) -> None:
         """
         Applique l'effet de la carte
         """
@@ -47,15 +50,16 @@ class EffetCarte:
 
     def carte_posable(self, carte, tour, participants, pioche, defausse) -> bool:
         """
-        :param defausse:
-        :param pioche:
-        :param participants:
-        :param tour:
+        :param defausse: défausse du jeu
+        :param pioche: pioche du jeu
+        :param participants: liste des participants de la partie
+        :param tour: tour en cours
         :param carte: carte à comparer
         :return: renvoie un boolean si la carte est posable sur celle-ci (pour des conditions spéciales)
         """
         for effet in self.__effets:
-            if not effet.carte_posable(carte, tour, participants, pioche, defausse):
+            if not effet.carte_posable(carte, tour, participants, pioche,
+                                       defausse):  # il n'y a pas de fonction carte_posable dans la classe Effet
                 return False
         return True
 
@@ -67,7 +71,7 @@ class EffetCarte:
 
 
 class ChoisirCouleur(Effet):
-    def appliquer(self, tour, participants, pioche, defausse):
+    def appliquer(self, tour, participants, pioche, defausse) -> int:
         """
         Applique l'effet de la carte
         """
@@ -77,13 +81,13 @@ class ChoisirCouleur(Effet):
 
 
 class PlusCarte(Effet):
-    def __init__(self, nb_cartes_a_piocher: int):
+    def __init__(self, nb_cartes_a_piocher: int) -> None:
         self.__nb_cartes_a_piocher = nb_cartes_a_piocher
 
-    def get_nb_cartes_a_piocher(self):
+    def get_nb_cartes_a_piocher(self) -> int:
         return self.__nb_cartes_a_piocher
 
-    def appliquer(self, tour, participants, pioche, defausse):
+    def appliquer(self, tour, participants, pioche, defausse) -> None:
         """
         Applique l'effet de la carte
         """
@@ -102,7 +106,7 @@ class PlusCarte(Effet):
                 for effet in carte_effet.get_effets():
                     if type(effet) is not type(PlusCarte):
                         continue
-                        
+
                     possede_carte_plus = True
                     break
 
@@ -122,7 +126,7 @@ class PlusCarte(Effet):
                     cartes_plus = []
                     for i in range(len(cartes_joueur_suivant)):
                         carte_joueur_suivant = cartes_joueur_suivant[i]
-                        
+
                         carte_effets = carte_joueur_suivant.get_carte_effet()
                         if carte_effets is None:
                             continue
@@ -150,10 +154,10 @@ class PlusCarte(Effet):
 
 
 class Interdiction(Effet):
-    def __init__(self, nb_interdictions: int):
+    def __init__(self, nb_interdictions: int) -> None:
         self.nb_interdictions = nb_interdictions
 
-    def appliquer(self, tour, participants, pioche, defausse):
+    def appliquer(self, tour, participants, pioche, defausse) -> None:
         """
         Applique l'effet de la carte
         """
@@ -162,7 +166,7 @@ class Interdiction(Effet):
 
 
 class ChangerSens(Effet):
-    def appliquer(self, tour, participants, pioche, defausse):
+    def appliquer(self, tour, participants, pioche, defausse) -> None:
         """
         Applique l'effet de la carte
         """

@@ -11,9 +11,11 @@ class Partie:
     Classe qui gère le déroulement du jeu
     """
 
-    def __init__(self, participants: Participants, deck: Deck, nb_cartes_a_distribuer: int = 7):
+    def __init__(self, participants: Participants, deck: Deck, nb_cartes_a_distribuer: int = 7) -> None:
         """
-        :param nb_joueurs: nombre de joueurs dans la partie
+        :param participants: liste des participants de la partie
+        :param deck: deck utilisé pour la partie
+        :param nb_cartes_a_distribuer: nombre de cartes à distribuer à chaque joueur
         """
         self.__participants: Participants = participants
         self.__deck: Deck = deck
@@ -24,7 +26,7 @@ class Partie:
         self.__defausse: Defausse
         self.__pioche: Pioche
 
-    def initialisation_partie(self):
+    def initialisation_partie(self) -> None:
         """
         Méthode qui initialise une partie
         """
@@ -48,7 +50,7 @@ class Partie:
         while not partie_finie:
             partie_finie = self.jouer_tour()
 
-    def jouer_tour(self):
+    def jouer_tour(self) -> bool:
         """
         Sert à jouer un tour
         """

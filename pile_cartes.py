@@ -33,8 +33,8 @@ class Pioche:
 
     def supprimer_carte(self, carte: list[Carte]) -> None:
         """
-        Enleve une carte à la pioche
-        :param carte: la carte enlever
+        Enlève une carte à la pioche
+        :param carte: la carte enlèver
         """
         self.__liste_cartes.remove(carte)
 
@@ -51,6 +51,9 @@ class Pioche:
         return len(self.get_liste_cartes()) <= 0
 
     def cartes_restantes(self) -> int:
+        """
+        :return: Le nombre de cartes restantes dans la pioche
+        """
         return len(self.get_liste_cartes())
 
     def prendre_cartes(self, nombre: int) -> list[Carte]:
@@ -99,9 +102,9 @@ class Defausse:
         """
         self.__liste_cartes.append(carte)
 
-    def carte_dessus(self) -> Carte:
+    def carte_dessus(self) -> Carte | None:
         """
-        :return: la carte se trouvant sur le dessus de la défausse
+        :return: la carte du dessus de la défausse ou None si la défausse est vide
         """
         if not self.__liste_cartes:
             return None
@@ -109,7 +112,7 @@ class Defausse:
 
     def pioche_vide(self) -> list[Carte]:
         """
-        :return: Toutes les cartes de la defausse melangees sauf la derniere
+        :return: Toutes les cartes de la défausse sont mélangées sauf la dernière.
         """
         carte_restante = self.__liste_cartes.pop()
 
@@ -133,7 +136,7 @@ class Defausse:
         """
         :return: une représentation de la défausse sous forme de chaîne de caractères
         """
-        res = 'Defausse qui contient:\n'
+        res = 'La défausse contient : \n'
         for carte in self.get_liste_cartes():
             res += carte.__str__() + '\n'
         return res
