@@ -28,3 +28,5 @@ def createur_deck() -> None:
     objet_json = j.dumps(deck_options, indent=4)
 
     open(f"{nom_deck}.json", "w").write(objet_json)
+
+createur_deck()
