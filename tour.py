@@ -1,10 +1,11 @@
-from carte import Carte # not used
+from carte import Carte  # not used
 from joueur import Participants, Joueur
 from pile_cartes import Pioche, Defausse
 
 
 class Tours:
     """ Classe qui gère les tours du jeu"""
+
     def __init__(self) -> None:
         """
         Initialise le sens du jeu (1 pour le sens normal, -1 pour le sens inverse)
@@ -76,7 +77,7 @@ class Tours:
         return indice
 
     def texte_main_joueur(self, joueur, cartes_compatibles, participants: Participants, pioche: Pioche,
-                          defausse: Defausse) -> str: # joueur, participants, pioche et defausse ne sont pas utilisés.
+                          defausse: Defausse) -> str:  # joueur, participants, pioche et defausse ne sont pas utilisés.
         """
         :param joueur: le joueur actuel
         :param cartes_compatibles: les cartes compatibles avec la carte du dessus de la défausse
@@ -130,7 +131,6 @@ class Tours:
         :param participants: les participants de la partie
         """
         self.passer_joueurs(1, participants)
-        self.__compteur_tour += 1
 
     def tour_suivant(self, participants: Participants, pioche: Pioche, defausse: Defausse) -> bool:
         """
@@ -175,8 +175,8 @@ class Tours:
 
         while True:
             indice_carte = int(input("Quelle carte voulez-vous jouer ? (Donnez l'indice de la carte) "))
-            carte_jouee = joueur.supprimer_carte_indice(indice_carte)
             if cartes_compatibles[indice_carte][1]:
+                carte_jouee = joueur.supprimer_carte_indice(indice_carte)
                 break
             else:
                 print("Vous ne pouvez pas jouer cette carte, veuillez en choisir une autre.")
@@ -186,4 +186,5 @@ class Tours:
         defausse.ajouter_carte(carte_jouee)
 
         print("Vous avez joué la carte : \n" + str(carte_jouee) + "\n")
+
         self.tour_fini(participants)

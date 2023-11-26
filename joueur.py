@@ -1,5 +1,35 @@
 from pile_cartes import Pioche
 from carte import Carte
+from effet_carte import EffetCarte, PlusCarte, ChoisirCouleur, Interdiction, ChangerSens
+
+def generer_deck_test() -> list[Carte]:
+    """
+    :return: renvoie une liste de cartes pour tester le jeu
+    """
+    plus_2 = PlusCarte(2)
+    plus_4 = PlusCarte(4)
+    choisir_couleur = ChoisirCouleur()
+    interdiction = Interdiction(1)
+    changer_sens = ChangerSens()
+
+    effets_test = [EffetCarte('Plus 2', 20, [plus_2]),
+                   EffetCarte('Plus 4', 50, [plus_4]),
+                   EffetCarte('Changer de sens', 20, [choisir_couleur]),
+                   EffetCarte('Passer son tour', 20, [interdiction]),
+                   EffetCarte('Changer de couleur', 20, [changer_sens])
+                   ]
+    return [
+        # Carte(0, 0, None),
+        # Carte(1, 1, None),
+        # Carte(2, 2, None),
+        # Carte(3, 3, None),
+        Carte(0, None, effets_test[0]),
+        Carte(0, None, effets_test[0]),
+        # Carte(0, None, effets_test[1]),
+        # Carte(0, 0, effets_test[2]),
+        # Carte(0, 0, effets_test[3]),
+        # Carte(0, 0, effets_test[4]),
+    ]
 
 
 class Joueur:
@@ -76,7 +106,8 @@ class Joueur:
         :param pioche: la pioche du jeu (Pioche)
         :param nb_cartes: le nombre de carte(s) que le joueur doit piocher (int)
         """
-        self.__liste_cartes = pioche.prendre_cartes(nb_cartes)
+        # self.__liste_cartes = pioche.prendre_cartes(nb_cartes)
+        self.__liste_cartes = generer_deck_test()
 
     def piocher_carte(self, pioche: Pioche) -> Carte:
         """
@@ -111,7 +142,8 @@ class Joueur:
 
         for carte in cartes:
             for carte_separee in cartes_separees:
-                if carte.get_couleur() == carte_separee[0] or (carte.get_couleur() is None and carte_separee[0] == -1):
+                if carte.get_couleur() == carte_separee[0] or (
+                        carte.get_couleur() is None and carte_separee[0] == -1):
                     carte_separee[1].append(carte)
                     break
             else:
@@ -158,7 +190,7 @@ class Participants:
         """
         return self.__liste_joueurs
 
-    def get_joueur_par_id(self, id : str) -> Joueur | None:
+    def get_joueur_par_id(self, id: str) -> Joueur | None:
         """
         :param id: id du joueur
         :return: le joueur qui a l'id donné
