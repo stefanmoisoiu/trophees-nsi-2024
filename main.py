@@ -1,9 +1,9 @@
 import random
-from carte import Deck
-from effet_carte import *
-from joueur import Participants
-from pile_cartes import Pioche, Defausse
-from tour import Tours
+from jeu.cartes.carte import Deck
+from jeu.cartes.effet_carte import *
+from jeu.joueur import Participants
+from jeu.cartes.pile_cartes import Pioche, Defausse
+from jeu.tour import Tours
 
 
 class Partie:
@@ -24,7 +24,7 @@ class Partie:
         self.__tour: Tours
 
         self.__defausse: Defausse
-        self.__pioche: Pioche
+        self.__pioche: Pioche   
 
     def initialisation_partie(self) -> None:
         """

@@ -1,6 +1,6 @@
-from carte import Carte  # not used
-from joueur import Participants, Joueur
-from pile_cartes import Pioche, Defausse
+from jeu.cartes.carte import Carte  # not used
+from jeu.joueur import Participants, Joueur
+from jeu.cartes.pile_cartes import Pioche, Defausse
 
 
 class Tours:

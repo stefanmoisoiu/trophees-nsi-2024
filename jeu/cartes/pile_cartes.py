@@ -1,5 +1,5 @@
 import random
-from carte import Carte
+from jeu.cartes.carte import Carte
 
 
 class Pioche:

@@ -1,6 +1,6 @@
-from pile_cartes import Pioche
-from carte import Carte
-from effet_carte import EffetCarte, PlusCarte, ChoisirCouleur, Interdiction, ChangerSens
+from jeu.cartes.pile_cartes import Pioche
+from jeu.cartes.carte import Carte
+from jeu.cartes.effet_carte import EffetCarte, PlusCarte, ChoisirCouleur, Interdiction, ChangerSens
 
 def generer_deck_test() -> list[Carte]:
     """

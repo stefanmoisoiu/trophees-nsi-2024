@@ -1,4 +1,4 @@
-from effet_carte import EffetCarte
+from jeu.cartes.effet_carte import EffetCarte
 
 
 class Carte:
