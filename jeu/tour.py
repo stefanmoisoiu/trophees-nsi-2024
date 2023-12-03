@@ -177,6 +177,15 @@ class Tours:
             indice_carte = int(input("Quelle carte voulez-vous jouer ? (Donnez l'indice de la carte) "))
             if cartes_compatibles[indice_carte][1]:
                 carte_jouee = joueur.supprimer_carte_indice(indice_carte)
+
+                # On vérifie si le joueur n'a plus qu'une carte
+                if joueur.uno():
+                    print(f"UNO ! {joueur.get_pseudo()} n'a plus qu'une carte !")
+
+                # On vérifie si le joueur n'a plus de carte
+                if joueur.plus_de_carte():
+                    print(f"{joueur.get_pseudo()} n'a plus de carte !")
+                    return True
                 break
             else:
                 print("Vous ne pouvez pas jouer cette carte, veuillez en choisir une autre.")

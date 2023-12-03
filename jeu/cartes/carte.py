@@ -131,6 +131,19 @@ class Deck:
                         deck.append(Carte(0, i_couleur, effet[0]))
         return deck
 
+    def get_nombre_cartes(self) -> int:
+        """
+        :return: renvoie le nombre de cartes dans le deck
+        """
+        nombre_cartes = 0
+        for effet in self.get_effets():
+            if effet[2]:
+                nombre_cartes += effet[1]
+            else:
+                nombre_cartes += effet[1] * len(self.get_couleurs())
+        nombre_cartes += (self.get_nombre_max() + 1) * len(self.get_couleurs())
+        return nombre_cartes
+
     def __str__(self) -> str:
         """
         :return: description du deck

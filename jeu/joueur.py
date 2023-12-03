@@ -2,6 +2,7 @@ from jeu.cartes.pile_cartes import Pioche
 from jeu.cartes.carte import Carte
 from jeu.cartes.effet_carte import EffetCarte, PlusCarte, ChoisirCouleur, Interdiction, ChangerSens
 
+
 def generer_deck_test() -> list[Carte]:
     """
     :return: renvoie une liste de cartes pour tester le jeu
@@ -81,6 +82,14 @@ class Joueur:
         """
         self.__liste_cartes.append(carte)
 
+    def uno(self) -> bool:
+        """
+        :return: bool si il reste une carte au joueur
+        """
+        if len(self.get_liste_cartes()) == 1:
+            return True
+        return False
+
     def supprimer_carte(self, carte) -> bool:
         """
         :param carte: carte choisie par le joueur (Carte)
@@ -118,13 +127,13 @@ class Joueur:
         self.ajouter_carte(carte)
         return carte
 
-    def recupere_points(self) -> int:
+    def points_joueur(self) -> int:
         """
         :return: Le nombre de points de la main du joueur (int)
         """
         points = 0
         for carte in self.get_liste_cartes():
-            points += carte.get_nombre()
+            points += carte.get_points()
         return points
 
     def trier_cartes_joueur(self) -> None:
@@ -162,6 +171,12 @@ class Joueur:
             cartes_triees.extend(carte_separee[1])
 
         return cartes_triees
+
+    def plus_de_carte(self) -> bool:
+        """
+        :return: renvoie un booléen si le joueur n'a plus de carte
+        """
+        return len(self.get_liste_cartes()) == 0
 
     def __str__(self) -> str:
         """
@@ -235,6 +250,14 @@ class Participants:
         """
         for joueur in self.get_liste_joueurs():
             joueur.piocher_cartes_depart(pioche, nb_cartes)
+
+    def classement_joueurs(self) -> list[Joueur]:
+        """
+        :return: renvoie la liste des joueurs triés par ordre croissant de points
+        """
+        liste_joueurs = self.get_liste_joueurs().copy()
+        liste_joueurs.sort(key=lambda joueur: joueur.points_joueur(), reverse=True)
+        return liste_joueurs
 
     def __str__(self) -> str:
         """

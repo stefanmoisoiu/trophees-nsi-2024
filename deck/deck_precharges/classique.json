@@ -1,0 +1,32 @@
+{
+    "nom_deck": "classique",
+    "couleurs": [
+        "jaune",
+        "bleu",
+        "rouge",
+        "vert"
+    ],
+    "nb_max_carte": 9,
+    "effets_cartes": [
+        [
+            "plus2",
+            2
+        ],
+        [
+            "changer_sens",
+            2
+        ],
+        [
+            "interdiction",
+            2
+        ],
+        [
+            "changer_couleur",
+            4
+        ],
+        [
+            "plus4",
+            4
+        ]
+    ]
+}

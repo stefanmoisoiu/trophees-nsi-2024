@@ -37,13 +37,15 @@ def chargement_deck(file_name: str) -> Deck: # input('nom du fichier à charger 
             effets.append((EffetCarte('interdiction', 20, [interdiction]), effet[1], False))
         if type_effet == 'changer_couleur':
             effets.append((EffetCarte('changer de couleur', 20, [choisir_couleur]), effet[1], True))
+        if type_effet == 'changer_sens':
+            effets.append((EffetCarte('changer de sens', 20, [changer_sens]), effet[1], False))
 
     deck_final = Deck(deck_charge['couleurs'], deck_charge['nb_max_carte'], effets) # deck_charge['nom_deck']
 
     return deck_final # deck.creer_deck() pour creer le deck soit on le fait là, soit dans la main.
 
 # deck = Deck(couleurs, numero_max_carte, effets)
-chargement_deck('deck.json')
+chargement_deck('deck_precharges/deck.json')
 
 
 

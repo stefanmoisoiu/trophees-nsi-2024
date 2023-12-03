@@ -1,4 +1,6 @@
 import json as j
+import os
+from chargeur_deck import chargement_deck
 
 
 def createur_deck() -> None:
@@ -8,9 +10,7 @@ def createur_deck() -> None:
     couleurs = input('couleurs présentes (écrire séparé par des espaces) : ').split(' ')
     nb_max_carte = int(input('valeur maximale des cartes : '))
 
-    effets = input(
-        'cartes a effets (plus2,plus4,interdiction,changer_couleur) avec leurs nombre (ex: plus2:4 plus4:2) : ').split(
-        ' ')
+    effets = input('cartes a effets (plus2,plus4,interdiction,changer_couleur,changer_sens) avec leurs nombre (ex: plus2:4 plus4:2) : ').split(' ')
 
     effets_tuple = []
 
@@ -29,4 +29,45 @@ def createur_deck() -> None:
 
     open(f"{nom_deck}.json", "w").write(objet_json)
 
+
+def choisir_deck():
+    # Prendre les decks dans le dossier deck_precharges
+    liste_decks_noms = os.listdir('deck_precharges')
+    liste_decks = []
+    for nom in liste_decks_noms:
+        liste_decks.append(chargement_deck(f'deck_precharges/{nom}'))
+
+    # Afficher les decks
+    for i in range(len(liste_decks)):
+        print(f"deck {i} : {liste_decks_noms[i].split('.')[0]}")
+        print(f"    - Nombre de cartes par couleurs : {liste_decks[i].get_nombre_max()}")
+        print("    - couleurs :")
+        for couleur in liste_decks[i].get_couleurs():
+            print(f"        - {couleur}")
+        print("    - effets :")
+        for tuple_effet in liste_decks[i].get_effets():
+            texte = f"        - {tuple_effet[0]} apparaissant {tuple_effet[1]} fois "
+            if tuple_effet[2]:
+                texte += "dans tout le deck qui est multicolore"
+            else:
+                texte += "par couleur de carte"
+            print(texte)
+
+        print(f"({liste_decks[i].get_nombre_cartes()} cartes au total)")
+        print("------------------")
+
+    # Demander le choix du deck
+    choix = int(input('Choisissez un deck : (chiffre)'))
+
+    return liste_decks[choix]
+
+
+def choix_deck_host():
+    """Permet de choisir un deck prégénèrer ou d'en créer un nouveau"""
+    if input('Tu veux créer un deck ? (oui/non)') == 'oui':
+        createur_deck()
+    return choisir_deck()
+
+
+#choisir_deck()
 createur_deck()
