@@ -24,9 +24,9 @@ class Partie:
         self.__tour: Tours
 
         self.__defausse: Defausse
-        self.__pioche: Pioche
+        self.__pioche: Pioche   
 
-    def initialisation(self) -> None:
+    def initialisation_partie(self) -> None:
         """
         Méthode qui initialise une partie
         """
@@ -46,17 +46,15 @@ class Partie:
         # on met la premiere carte de la pioche dans la défausse
         self.__defausse.ajouter_carte(self.__pioche.prendre_cartes(1)[0])
 
-    def jouer_partie(self):
         partie_finie = False
         while not partie_finie:
-            partie_finie = self.__tour.tour_suivant(self.__participants, self.__pioche, self.__defausse)
+            partie_finie = self.jouer_tour()
 
-        print("Partie terminée !")
-
-        classement = self.__participants.classement_joueurs()
-
-        for i in range(len(classement)):
-            print(f"{i + 1} : {classement[i]} avec {classement[i].get_points()} points")
+    def jouer_tour(self) -> bool:
+        """
+        Sert à jouer un tour
+        """
+        return self.__tour.tour_suivant(self.__participants, self.__pioche, self.__defausse)
 
 
 nb_joueurs = int(input("Combien de joueurs ? "))
@@ -81,5 +79,4 @@ effets = [(EffetCarte('plus 2', 20, [plus_2]), 2, False),
 deck = Deck(couleurs, numero_max_carte, effets)
 partie = Partie(participants, deck)
 
-partie.initialisation()
-partie.jouer_partie()
+partie.initialisation_partie()
