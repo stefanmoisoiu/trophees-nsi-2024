@@ -9,7 +9,39 @@ def createur_deck() -> None:
     nom_deck = input('nom du deck : ')
     couleurs = input('couleurs présentes (écrire séparé par des espaces) : ').split(' ')
     nb_max_carte = int(input('valeur maximale des cartes : '))
-
+    
+    effets_texte = []
+    while True:
+        creer_carte_effet = input('Créer une carte à effet ? (O/N)')
+        if creer_carte_effet == 'N':
+            break
+        
+        effets_dispos = ['plus','interdiction','changer_couleur','changer_sens']
+        
+        while len(effets_dispos) > 0:
+            
+            ajouter_effet = input('Ajouter un effet ? (O/N)')
+            if ajouter_effet == 'N':
+                break
+            
+            for i in range(len(effets_dispos)):
+                print(f'{i} {effets_dispos[i]}')
+            
+            choix = int(input('quel effet à ajouter? (indice)'))
+            
+            effet_choisi = effets_dispos[i]
+            effets_dispos.pop(i)
+            
+            match effet_choisi:
+                case 'plus':
+                    valeur_plus = int(input('Combien de cartes doit le plus donner ?'))
+                    print('flop')
+                case 'interdiction':
+                    nb_interdictions = int(input("Combien de joueurs l'interdiction faire passer"))
+                    print('ok')
+                case 'changer_couleur':
+                    print('')
+        
     effets = input('cartes a effets (plus2,plus4,interdiction,changer_couleur,changer_sens) avec leurs nombre (ex: plus2:4 plus4:2) : ').split(' ')
 
     effets_tuple = []
