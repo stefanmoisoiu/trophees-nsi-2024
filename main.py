@@ -1,4 +1,6 @@
 import random
+
+from jeu.bot import Bot
 from jeu.cartes.carte import Deck
 from jeu.cartes.effet_carte import *
 from jeu.joueur import Participants
@@ -60,6 +62,10 @@ class Partie:
 nb_joueurs = int(input("Combien de joueurs ? "))
 participants = Participants()
 participants.creer_joueurs(nb_joueurs)
+
+nb_bots = int(input("Combien de bots ? "))
+for i in range(nb_bots):
+    participants.ajouter_joueur(Bot(i, f"Bot {i + 1}"))
 
 couleurs = ['rouge', 'bleu', 'vert', 'jaune']
 numero_max_carte = 9

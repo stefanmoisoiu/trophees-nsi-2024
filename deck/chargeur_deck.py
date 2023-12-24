@@ -46,6 +46,3 @@ def chargement_deck(file_name: str) -> Deck: # input('nom du fichier à charger 
 
 # deck = Deck(couleurs, numero_max_carte, effets)
 chargement_deck('deck_precharges/deck.json')
-
-
-

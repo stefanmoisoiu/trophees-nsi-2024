@@ -1,15 +1,15 @@
-from tour import Tours
-from joueur import Joueur
-from cartes.pile_cartes import Pioche, Defausse
-from cartes.carte import Carte
+from jeu.tour import Tours
+from jeu.joueur import Joueur
+from jeu.cartes.pile_cartes import Pioche, Defausse
+from jeu.cartes.carte import Deck
 import random
 
 
 class Bot(Joueur):
-    def __init__(self, id: int, name: str):
+    def __init__(self, id: int, name: str) -> None:
         super().__init__(id, name)
 
-    def play_turn(self, tour: Tours, pioche: Pioche, defausse: Defausse):
+    def play_turn(self, tour: Tours, pioche: Pioche, defausse: Defausse) -> None:
         """
         BOT qui joue un tour
         :param tour: le tour actuel
@@ -48,9 +48,9 @@ class Bot(Joueur):
             print(f"Bot {self.get_pseudo()} a jouer : {carte_jouer}")
 
             if choisir_couleur:
-                couleur = random.choice(Carte.get_couleur())
+                couleur = random.choice(Deck.get_couleurs())
                 print(f"Bot {self.get_pseudo()} a choisi la couleur : {couleur}")
-                defausse.carte_dessus().set_couleur(couleur) # marche pas pour le moment
+                defausse.carte_dessus().set_couleur(couleur) # ne marche pas pour le moment
 
         else:
 
