@@ -10,58 +10,6 @@ class Effet:
         :param participants: liste des participants de la partie (Participants)
         :param tour: tour en cours
         """
-        # while True:  # quelqu'un pioche
-        #     joueur_suivant = tour.joueur_suivant(participants)
-        #     cartes_joueur_suivant = joueur_suivant.get_liste_cartes()
-        #     nb_cartes_a_piocher = 2
-        #
-        #     possede_carte_plus = False
-        #     for carte in cartes_joueur_suivant:
-        #
-        #         carte_effet = carte.get_carte_effet()
-        #         if carte_effet is None:
-        #             continue
-        #         else:
-        #             for effet in carte_effet.get_effets():
-        #                 if type(effet) is not type(PlusCarte):
-        #                     continue
-        #                 else:
-        #                     possede_carte_plus = True
-        #                     break
-        #
-        #     if not possede_carte_plus:
-        #         # le joueur suivant ne peut pas ajouter de cartes +
-        #         print(f"Tu ne peux pas ajouter de cartes +, tu dois piocher {nb_cartes_a_piocher}.")
-        #         time.sleep(2)
-        #         joueur_suivant.piocher_carte_depart(nb_cartes_a_piocher, pioche)
-        #         break
-        #
-        #     else:
-        #         choix = int(input(f"Veux-tu piocher {nb_cartes_a_piocher}, veux-tu mettre poser une carte + (0) ou piocher (1) : "))
-        #         if choix == 1:
-        #             joueur_suivant.piocher_carte_depart(nb_cartes_a_piocher, pioche)
-        #             break
-        #         else:
-        #             cartes_plus = []
-        #             for i in range(len(cartes_joueur_suivant)):
-        #                 carte_joueur_suivant = cartes_joueur_suivant[i]
-        #
-        #                 carte_effets = carte_joueur_suivant.get_carte_effet()
-        #                 if carte_effets is None:
-        #                     continue
-        #                 else :
-        #                     for effet in carte_effets.get_effets():
-        #                         if type(effet) is not type(PlusCarte):
-        #                             continue
-        #                     cartes_plus.append(carte_joueur_suivant)
-        #                     print(f"{i} : {carte_joueur_suivant}")
-        #
-        #             choix_carte = int(input("Quelle carte + veux-tu poser ? "))
-        #             carte_a_poser = cartes_plus[choix_carte]
-        #             joueur_suivant.supprimer_carte(carte_a_poser)
-        #             defausse.ajouter_carte(carte_a_poser)
-        #             tour.passer_joueurs(1, participants)
-        #             nb_cartes_a_piocher += 2 # faut mettre en fonction du plus 2 ou plus 4
         pass
 
 
@@ -151,7 +99,7 @@ class PlusCarte(Effet):
         """
         cartes_a_piocher = self.__nb_cartes_a_piocher
         tour.passer_joueurs(1, participants)
-        print("PASSER TOUR0")
+        print(f"/n PASSE TOUR : {tour.get_compteur_tour()}")
 
         while True:  # quelqu'un pioche
             joueur_actuel = tour.joueur_actuel(participants)

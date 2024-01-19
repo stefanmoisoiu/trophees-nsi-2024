@@ -152,7 +152,7 @@ class Tours:
 
         joueur.trier_cartes_joueur()
 
-        print(f"TOUR {self.__compteur_tour} \n")
+        print(f"\nTOUR {self.__compteur_tour} \n")
         print(f"Voici la carte sur la défausse : \n{str(carte_dessus)} \n")
         print(f"Voici les cartes du joueur {joueur.get_pseudo()} : ")
         print(self.texte_main_joueur(joueur, cartes_compatibles, participants, pioche, defausse))

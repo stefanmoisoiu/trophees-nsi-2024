@@ -59,6 +59,7 @@ class Partie:
         return self.__tour.tour_suivant(self.__participants, self.__pioche, self.__defausse)
 
 
+# décheterie de code
 nb_joueurs = int(input("Combien de joueurs ? "))
 participants = Participants()
 participants.creer_joueurs(nb_joueurs)

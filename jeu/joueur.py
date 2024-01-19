@@ -115,8 +115,7 @@ class Joueur:
         :param pioche: la pioche du jeu (Pioche)
         :param nb_cartes: le nombre de carte(s) que le joueur doit piocher (int)
         """
-        # self.__liste_cartes = pioche.prendre_cartes(nb_cartes)
-        self.__liste_cartes = generer_deck_test()
+        self.__liste_cartes = pioche.prendre_cartes(nb_cartes)
 
     def piocher_carte(self, pioche: Pioche) -> Carte:
         """
